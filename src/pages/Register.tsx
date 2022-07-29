@@ -1,6 +1,10 @@
+import { useNavigate } from 'react-router-dom'
+
 import githubIcon from '../../public/githubIcon.svg'
 
 export function Register() {
+	const navigate = useNavigate()
+
 	return (
 		<div>
 			<div className='h-28 w-screen flex items-center justify-center text-4xl font-semibold'>
@@ -32,6 +36,7 @@ export function Register() {
 			<div className='h-20 w-screen flex items-center justify-center text-xl'>
 				<button
 				className='bg-[#b64448] h-16 w-60 rounded-lg'
+				onClick={() => navigate('/')}
 				>
 					Submit
 				</button>
