@@ -24,14 +24,14 @@ export function Login() {
 						<div
 							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center mb-3'
 						>
-							<img className='h-10' src={googleIcon} alt="Google Icon" />
-							<button className='ml-3' onClick={() => navigate('/')}>Continue with Google</button>
+							<img className='h-10' src={googleIcon} alt='Google Icon' />
+							<button className='ml-3' onClick={() => navigate('/register')}>Continue with Google</button>
 						</div>
 						<div
 							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center'
 						>
-							<img className='h-10' src={githubIcon} alt="Github Icon" />
-							<button className='ml-3' onClick={() => navigate('/')}>Continue with Github</button>
+							<img className='h-10' src={githubIcon} alt='Github Icon' />
+							<button className='ml-3' onClick={() => navigate('/register')}>Continue with Github</button>
 						</div>
 					</div>
 				</div>
@@ -39,10 +39,10 @@ export function Login() {
 				<div>
 					<div className='h-80 w-screen mt-10 xl:w-1/2 '>
 						<img className='h-full w-screen xl:w-2/2'
-							src={backgroundLogin} alt="backgroundLogin" />
+							src={backgroundLogin} alt='backgroundLogin' />
 					</div>
 					<div className='h-44 w-full flex items-center justify-center font-semibold text-3xl p-5'>
-						<span>Your Perfect Pomodoro for Planning your activities</span>
+						<span className='text-center'>Your Perfect Pomodoro for Planning your activities</span>
 					</div>
 				</div>
 			}

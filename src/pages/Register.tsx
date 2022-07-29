@@ -1,0 +1,41 @@
+import githubIcon from '../../public/githubIcon.svg'
+
+export function Register() {
+	return (
+		<div>
+			<div className='h-28 w-screen flex items-center justify-center text-4xl font-semibold'>
+				<h1>Fill your profile</h1>
+			</div>
+			<div className='h-28 w-screen flex items-center justify-center text-xl p-10'>
+				<p className='text-center'>Dont't worry, you can change this later, okay?</p>
+			</div>
+			<div className='h-28 w-screen flex items-center justify-center text-xl p-10 '>
+				<img src={githubIcon} alt='user image' className='h-24 rounded-full' />
+			</div>
+			<div className='h-full w-screen flex items-center justify-center flex-col p-10'>
+				<input
+					className='h-12 w-96 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
+					type="text"
+					placeholder='Nome'
+				/>
+				<input
+					className='h-12 w-96 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
+					type="text"
+					placeholder='Nick'
+				/>
+				<input
+					className='h-12 w-96 rounded-lg bg-[#21242c] border-none outline-none'
+					type="text"
+					placeholder='Email'
+				/>
+			</div>
+			<div className='h-20 w-screen flex items-center justify-center text-xl'>
+				<button
+				className='bg-[#b64448] h-16 w-60 rounded-lg'
+				>
+					Submit
+				</button>
+			</div>
+		</div>
+	)
+}
