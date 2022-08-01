@@ -6,7 +6,7 @@ export function Register() {
 	const navigate = useNavigate()
 
 	return (
-		<div>
+		<div className='overflow-x-hidden'>
 			<div className='h-28 w-screen flex items-center justify-center text-4xl font-semibold'>
 				<h1>Fill your profile</h1>
 			</div>
