@@ -1,6 +1,7 @@
 import { RingProgress } from '@mantine/core'
 
 import { Header } from "../components/Header"
+import { TaskFavorite } from '../components/TaskFavorite'
 
 export function Home() {
 	return (
@@ -23,6 +24,13 @@ export function Home() {
 					<p>Wow! Look at the level you've reached 🚀</p>
 				</div>
 			</div>
+			<div className='h-16 w-full flex items-center justify-start font-semibold text-xl'>
+				<span className='ml-5'>Your favorites tasks (4):</span>
+			</div>
+			<TaskFavorite />
+			<TaskFavorite />
+			<TaskFavorite />
+			<TaskFavorite />
 		</div>
 	)
 }
