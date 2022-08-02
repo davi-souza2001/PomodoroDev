@@ -26,9 +26,9 @@ export function Header() {
 					src={PomodoroLogo} alt='logo' />
 				<p className='mr-10'>Pomo</p>
 			</div>
-			<div className='h-full w-10 flex items-center justify-center text-xl font-semibold'>
+			<div className='h-full w-10 flex items-center justify-center text-xl font-semibold xl:hidden'>
 				<button onClick={handleClick}>
-					<HiMenu className='text-3xl'/>
+					<HiMenu className='text-3xl' />
 				</button>
 				<Menu
 					anchorEl={anchorEl}
@@ -63,6 +63,29 @@ export function Header() {
 						Profile
 					</MenuItem>
 				</Menu>
+			</div>
+			<div className='hidden xl:h-full xl:w-64 xl:flex xl:items-center xl:justify-around xl:text-xl xl:font-semibold'>
+				<span
+					className='cursor-pointer'
+					onClick={() => {
+						navigate('/profile')
+					}}>
+					Home
+				</span>
+				<span
+					className='cursor-pointer'
+					onClick={() => {
+						navigate('/profile')
+					}}>
+					Tasks
+				</span>
+				<span
+					className='cursor-pointer'
+					onClick={() => {
+						navigate('/profile')
+					}}>
+					Profile
+				</span>
 			</div>
 		</div>
 	)
