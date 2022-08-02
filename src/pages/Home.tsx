@@ -1,9 +1,10 @@
+import { RingProgress } from '@mantine/core'
+
 import { Header } from "../components/Header"
-import { RingProgress, Text } from '@mantine/core'
 
 export function Home() {
 	return (
-		<div>
+		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
 			<Header />
 			<div className='h-20 w-full flex items-center justify-start font-semibold text-2xl'>
 				<span className='ml-10'>Morning, Davi 👋</span>

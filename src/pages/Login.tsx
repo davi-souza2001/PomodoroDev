@@ -14,7 +14,7 @@ export function Login() {
 	}
 
 	return (
-		<div className={`h-screen w-screen flex items-center justify-start flex-col ${!loginArea && 'xl:flex-row'}`}>
+		<div className={`h-screen w-screen flex items-center justify-start flex-col ${!loginArea && 'xl:flex-row'} bg-[#181A20] font-poppins`}>
 			{loginArea ?
 				<div>
 					<div className='h-60 w-full flex items-center justify-center font-semibold text-5xl'>
