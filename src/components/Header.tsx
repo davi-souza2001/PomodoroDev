@@ -68,14 +68,14 @@ export function Header() {
 				<span
 					className='cursor-pointer'
 					onClick={() => {
-						navigate('/profile')
+						navigate('/')
 					}}>
 					Home
 				</span>
 				<span
 					className='cursor-pointer'
 					onClick={() => {
-						navigate('/profile')
+						navigate('/tasks')
 					}}>
 					Tasks
 				</span>
