@@ -34,22 +34,24 @@ export function Home() {
 					className='flex items-center justify-center'
 				>
 					<div className='h-72 w-80 flex items-center justify-start flex-col bg-[#181A20] rounded-lg'>
-						<input
-							className='h-12 w-5/6 mb-3 rounded-lg bg-[#21242c] border-none outline-none mt-5'
-							type="text"
-							placeholder='Pomo`s name'
-						/>
-						<input
-							className='h-12 w-5/6 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
-							type="text"
-							placeholder='Pomo`s time (in minute)'
-						/>
-						<button
-							className='bg-[#b64448] h-16 w-60 rounded-lg border-none outline-none'
-							onClick={handleClose}
-						>
-							Submit
-						</button>
+						<form className='h-full w-full flex items-center justify-center flex-col'>
+							<input
+								className='h-12 w-5/6 mb-3 rounded-lg bg-[#21242c] border-none outline-none'
+								type="text"
+								placeholder={`Pomo's name`}
+							/>
+							<input
+								className='h-12 w-5/6 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
+								type="text"
+								placeholder={`Pomo's time (in minute)`}
+							/>
+							<button
+								className='bg-[#b64448] h-16 w-60 rounded-lg border-none outline-none'
+								onClick={handleClose}
+							>
+								Submit
+							</button>
+						</form>
 					</div>
 				</Modal>
 			</div>
