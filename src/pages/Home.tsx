@@ -4,13 +4,15 @@ import { Header } from "../components/Header"
 import { TaskFavorite } from '../components/TaskFavorite'
 
 import PomodoroLogo from '../../public/PomodoroLogo.svg'
+import { BiAlarmAdd, BiBookAdd } from 'react-icons/bi'
 
 export function Home() {
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
 			<Header />
-			<div className='h-20 w-full flex items-center justify-start font-semibold text-2xl'>
-				<span className='ml-10'>Morning, Davi 👋</span>
+			<div className='h-20 w-full flex items-center justify-around font-semibold text-2xl'>
+				<span className='xl:ml-[-20vw]'>Morning, Davi 👋</span>
+				<button className='xl:mr-[-20vw] cursor-pointer bg-green-600 p-3 rounded-full text-3xl xl:text-4xl'><BiAlarmAdd/></button>
 			</div>
 			<div className='h-28 w-full flex items-center justify-center font-semibold text-xl'>
 				<div className='h-full w-[90%] bg-[#23262f] p-10 rounded-lg flex items-center justify-start xl:justify-around'>
