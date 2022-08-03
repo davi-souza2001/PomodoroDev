@@ -1,18 +1,57 @@
+import { useState } from 'react'
+import { BiAlarmAdd } from 'react-icons/bi'
 import { RingProgress } from '@mantine/core'
 
 import { Header } from "../components/Header"
 import { TaskFavorite } from '../components/TaskFavorite'
 
 import PomodoroLogo from '../../public/PomodoroLogo.svg'
-import { BiAlarmAdd, BiBookAdd } from 'react-icons/bi'
+import Modal from '@mui/material/Modal'
 
 export function Home() {
+	const [open, setOpen] = useState(false)
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
+
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
 			<Header />
 			<div className='h-20 w-full flex items-center justify-around font-semibold text-2xl'>
-				<span className='xl:ml-[-20vw]'>Morning, Davi 👋</span>
-				<button className='xl:mr-[-20vw] cursor-pointer bg-green-600 p-3 rounded-full text-3xl xl:text-4xl'><BiAlarmAdd/></button>
+				<span className='xl:ml-[-20vw]'>
+					Morning, Davi 👋
+				</span>
+				<button
+					onClick={handleOpen}
+					className='xl:mr-[-20vw] cursor-pointer bg-green-600 p-3 rounded-full text-3xl xl:text-4xl'
+				>
+					<BiAlarmAdd />
+				</button>
+				<Modal
+					open={open}
+					onClose={handleClose}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+					className='flex items-center justify-center'
+				>
+					<div className='h-72 w-80 flex items-center justify-start flex-col bg-[#181A20] rounded-lg'>
+						<input
+							className='h-12 w-5/6 mb-3 rounded-lg bg-[#21242c] border-none outline-none mt-5'
+							type="text"
+							placeholder='Pomo`s name'
+						/>
+						<input
+							className='h-12 w-5/6 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
+							type="text"
+							placeholder='Pomo`s time (in minute)'
+						/>
+						<button
+							className='bg-[#b64448] h-16 w-60 rounded-lg border-none outline-none'
+							onClick={handleClose}
+						>
+							Submit
+						</button>
+					</div>
+				</Modal>
 			</div>
 			<div className='h-28 w-full flex items-center justify-center font-semibold text-xl'>
 				<div className='h-full w-[90%] bg-[#23262f] p-10 rounded-lg flex items-center justify-start xl:justify-around'>
