@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { BiPause, BiPlay, BiSquareRounded, BiX } from "react-icons/bi"
 import { useLocation } from "react-router-dom"
 import { Header } from "../components/Header"
+import UseAuth from "../data/hook/UseAuth"
 
 export function Pomodoro() {
 	const { pathname } = useLocation()
@@ -22,6 +23,12 @@ export function Pomodoro() {
 			}, 0.5)
 		}
 	}, [secondsAmount, onRunning])
+
+	const { getUser } = UseAuth()
+
+	useEffect(() => {
+		getUser()
+	}, [])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>

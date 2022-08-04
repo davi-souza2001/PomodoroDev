@@ -23,11 +23,6 @@ export function Register() {
 					placeholder='Nome'
 				/>
 				<input
-					className='h-12 w-96 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
-					type="text"
-					placeholder='Nick'
-				/>
-				<input
 					className='h-12 w-96 rounded-lg bg-[#21242c] border-none outline-none'
 					type="text"
 					placeholder='Email'

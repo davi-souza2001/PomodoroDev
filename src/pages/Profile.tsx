@@ -4,9 +4,14 @@ import { Header } from "../components/Header"
 
 import PomodoroLogo from '../../public/PomodoroLogo.svg'
 import UseAuth from "../data/hook/UseAuth"
+import { useEffect } from "react"
 
 export function Profile() {
-	const { logout } = UseAuth()
+	const { logout, user, getUser } = UseAuth()
+
+	useEffect(() => {
+		getUser()
+	}, [])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
@@ -39,8 +44,8 @@ export function Profile() {
 						alt='User photo'
 					/>
 					<div className='flex items-center justify-center flex-col'>
-						<span className='ml-3'>Davi Souza</span>
-						<span className='ml-3 text-sm'>@davi-souza2001</span>
+						<span className='ml-3'>{user.name.length !== 0 ? user.name : 'not user'}</span>
+						<span className='ml-[-40px] text-sm'>{user.nick.length !== 0 ? user.nick : 'not nick'}</span>
 					</div>
 				</div>
 			</div>

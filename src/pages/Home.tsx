@@ -10,7 +10,7 @@ import PomodoroLogo from '../../public/PomodoroLogo.svg'
 import UseAuth from '../data/hook/UseAuth'
 
 export function Home() {
-	const { getUser } = UseAuth()
+	const { getUser, user } = UseAuth()
 
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
@@ -25,7 +25,7 @@ export function Home() {
 			<Header />
 			<div className='h-20 w-full flex items-center justify-around font-semibold text-2xl'>
 				<span className='xl:ml-[-20vw]'>
-					Morning, Davi 👋
+					Morning, {user.name.length !== 0 ? user.name : 'not user'} 👋
 				</span>
 				<button
 					onClick={handleOpen}
@@ -81,7 +81,7 @@ export function Home() {
 						</div>
 						<img
 							className='h-3/4 rounded-full'
-							src={PomodoroLogo}
+							src={user.avatar.length !== 0 ? user.avatar : PomodoroLogo}
 							alt='User photo'
 						/>
 					</div>
