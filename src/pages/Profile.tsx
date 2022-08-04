@@ -3,8 +3,11 @@ import { RingProgress } from "@mantine/core"
 import { Header } from "../components/Header"
 
 import PomodoroLogo from '../../public/PomodoroLogo.svg'
+import UseAuth from "../data/hook/UseAuth"
 
 export function Profile() {
+	const { logout } = UseAuth()
+
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
 			<Header />
@@ -42,7 +45,10 @@ export function Profile() {
 				</div>
 			</div>
 			<div className='h-28 w-full flex items-center justify-start'>
-				<button className='ml-5 bg-red-600 p-3 rounded-lg text-xl font-semibold'>
+				<button
+					onClick={logout}
+					className='ml-5 bg-red-600 p-3 rounded-lg text-xl font-semibold'
+				>
 					Logout
 				</button>
 			</div>

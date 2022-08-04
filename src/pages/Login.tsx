@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import backgroundLogin from '../../public/backgroundLogin.svg'
 import googleIcon from '../../public/googleIcon.svg'
 import githubIcon from '../../public/githubIcon.svg'
+import UseAuth from '../data/hook/UseAuth'
 
 export function Login() {
 	const navigate = useNavigate()
 	const [loginArea, setLoginArea] = useState(false)
+
+	const { handleLoginGoogle } = UseAuth()
 
 	function handleOpenLoginArea() {
 		setLoginArea(!loginArea)
@@ -25,7 +28,7 @@ export function Login() {
 							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center mb-3'
 						>
 							<img className='h-10' src={googleIcon} alt='Google Icon' />
-							<button className='ml-3' onClick={() => navigate('/register')}>Continue with Google</button>
+							<button className='ml-3' onClick={handleLoginGoogle}>Continue with Google</button>
 						</div>
 						<div
 							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center'

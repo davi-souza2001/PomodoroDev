@@ -1,20 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiAlarmAdd } from 'react-icons/bi'
 import { RingProgress } from '@mantine/core'
 import Modal from '@mui/material/Modal'
 
 import { Header } from "../components/Header"
 import { TaskFavorite } from '../components/TaskFavorite'
-import UseAuth from '../data/hook/UseAuth'
 
 import PomodoroLogo from '../../public/PomodoroLogo.svg'
+import UseAuth from '../data/hook/UseAuth'
 
 export function Home() {
-	const { test } = UseAuth()
+	const { getUser } = UseAuth()
 
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
+
+	useEffect(() => {
+		getUser()
+	}, [])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
