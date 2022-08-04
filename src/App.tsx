@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './data/context/AuthContext'
 
 import { Home } from './pages/Home'
 import { Login } from './pages/Login'
@@ -9,13 +10,15 @@ import { Tasks } from './pages/Tasks'
 
 export default function App() {
 	return (
-		<Routes>
-			<Route path='/' element={<Home />} />
-			<Route path='/login' element={<Login />} />
-			<Route path='/register' element={<Register />} />
-			<Route path='/tasks' element={<Tasks />} />
-			<Route path='/profile' element={<Profile />} />
-			<Route path='/:pomodoro' element={<Pomodoro />} />
-		</Routes>
+		<AuthProvider>
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='/tasks' element={<Tasks />} />
+				<Route path='/profile' element={<Profile />} />
+				<Route path='/:pomodoro' element={<Pomodoro />} />
+			</Routes>
+		</AuthProvider>
 	)
 }
