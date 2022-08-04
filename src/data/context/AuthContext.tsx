@@ -13,7 +13,8 @@ const AuthContext = createContext<AuthContextProps>({
 		email: '',
 		name: '',
 		nick: ''
-	}
+	},
+	loading: false
 })
 const provider = new GoogleAuthProvider()
 
@@ -22,6 +23,7 @@ interface AuthContextProps {
 	getUser: () => Promise<void>
 	logout: () => Promise<void>
 	user: UserProps
+	loading: boolean
 }
 
 interface UserProps {
@@ -39,8 +41,10 @@ export function AuthProvider(props: any) {
 		name: '',
 		nick: ''
 	})
+	const [loading, setLoading] = useState(false)
 
 	async function handleLoginGoogle() {
+		setLoading(true)
 		signInWithPopup(auth, provider)
 			.then((result) => {
 				setUser({
@@ -49,13 +53,16 @@ export function AuthProvider(props: any) {
 					avatar: result.user.photoURL ?? '',
 					nick: '@testando'
 				})
+				setLoading(false)
 				navigate('/')
 			}).catch((error) => {
 				console.log(error.message)
 			})
+		setLoading(false)
 	}
 
 	async function getUser() {
+		setLoading(true)
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				setUser({
@@ -68,19 +75,23 @@ export function AuthProvider(props: any) {
 				console.log('Not user')
 			}
 		})
+		setLoading(false)
 	}
 
 	async function logout() {
+		setLoading(true)
 		signOut(auth).then(() => {
 			console.log('Logout sucess!')
+			setLoading(false)
 			navigate('/login')
 		}).catch((error) => {
 			console.log(error)
 		})
+		setLoading(false)
 	}
 
 	return (
-		<AuthContext.Provider value={{ handleLoginGoogle, getUser, logout, user }}>
+		<AuthContext.Provider value={{ handleLoginGoogle, getUser, logout, user, loading }}>
 			{props.children}
 		</AuthContext.Provider>
 	)

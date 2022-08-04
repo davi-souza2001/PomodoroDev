@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { ForceAuth } from './components/ForceAuth'
 import { AuthProvider } from './data/context/AuthContext'
 
 import { Home } from './pages/Home'
@@ -11,14 +12,16 @@ import { Tasks } from './pages/Tasks'
 export default function App() {
 	return (
 		<AuthProvider>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
-				<Route path='/tasks' element={<Tasks />} />
-				<Route path='/profile' element={<Profile />} />
-				<Route path='/:pomodoro' element={<Pomodoro />} />
-			</Routes>
+			<ForceAuth>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/register' element={<Register />} />
+					<Route path='/tasks' element={<Tasks />} />
+					<Route path='/profile' element={<Profile />} />
+					<Route path='/:pomodoro' element={<Pomodoro />} />
+				</Routes>
+			</ForceAuth>
 		</AuthProvider>
 	)
 }
