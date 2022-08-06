@@ -1,13 +1,16 @@
 import { createContext, useState } from 'react'
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth"
-
-import { auth } from '../../firebase/config'
 import { useNavigate } from 'react-router-dom'
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { collection, onSnapshot, doc, query, where, setDoc } from 'firebase/firestore'
+
+import { auth, db } from '../../firebase/config'
 
 const AuthContext = createContext<AuthContextProps>({
 	handleLoginGoogle: () => Promise.resolve(),
 	getUser: () => Promise.resolve(),
 	logout: () => Promise.resolve(),
+	getTasks: () => Promise.resolve(),
+	handleAddTask: (e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) => Promise.resolve(),
 	user: {
 		avatar: '',
 		email: '',
@@ -15,7 +18,13 @@ const AuthContext = createContext<AuthContextProps>({
 		nick: '',
 		xp: 0
 	},
-	loading: false
+	loading: false,
+	tasks: [{
+		email: '',
+		time: 0,
+		title: '',
+		favorite: false
+	}]
 })
 const provider = new GoogleAuthProvider()
 
@@ -23,8 +32,11 @@ interface AuthContextProps {
 	handleLoginGoogle: () => Promise<void>
 	getUser: () => Promise<void>
 	logout: () => Promise<void>
+	getTasks: () => Promise<void>
+	handleAddTask: (e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) => Promise<void>
 	user: UserProps
 	loading: boolean
+	tasks: TaskProps[]
 }
 
 interface UserProps {
@@ -35,8 +47,17 @@ interface UserProps {
 	xp: 0
 }
 
+export interface TaskProps {
+	email: string
+	time: number
+	title: string
+	favorite: boolean
+}
+
 export function AuthProvider(props: any) {
 	const navigate = useNavigate()
+	const [loading, setLoading] = useState(false)
+	const [tasks, setTasks] = useState<TaskProps[]>([])
 	const [user, setUser] = useState<UserProps>({
 		avatar: '',
 		email: '',
@@ -44,7 +65,6 @@ export function AuthProvider(props: any) {
 		nick: '',
 		xp: 0
 	})
-	const [loading, setLoading] = useState(false)
 
 	async function handleLoginGoogle() {
 		setLoading(true)
@@ -95,8 +115,42 @@ export function AuthProvider(props: any) {
 		setLoading(false)
 	}
 
+	async function handleAddTask(e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) {
+		e.preventDefault()
+		const data = {
+			time,
+			title,
+			email,
+			favorite: false
+		}
+
+		const newTaskRef = doc(collection(db, 'tasks'))
+
+		await setDoc(newTaskRef, data)
+	}
+
+	async function getTasks() {
+		const q = query(collection(db, 'tasks'), where('email', '==', user.email))
+		onSnapshot(q, (querySnapshot) => {
+			const tasks: TaskProps[] = []
+			querySnapshot.forEach((doc) => {
+				tasks.push(doc.data() as TaskProps)
+			})
+			setTasks(tasks)
+		})
+	}
+
 	return (
-		<AuthContext.Provider value={{ handleLoginGoogle, getUser, logout, user, loading }}>
+		<AuthContext.Provider value={{
+			handleLoginGoogle,
+			getUser,
+			logout,
+			user,
+			loading,
+			handleAddTask,
+			getTasks,
+			tasks
+		}}>
 			{props.children}
 		</AuthContext.Provider>
 	)

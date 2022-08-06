@@ -4,10 +4,11 @@ import { Task } from "../components/Task";
 import UseAuth from "../data/hook/UseAuth";
 
 export function Tasks() {
-	const { getUser, user } = UseAuth()
+	const { getUser, user, getTasks } = UseAuth()
 
 	useEffect(() => {
 		getUser()
+		getTasks()
 	}, [])
 
 	return (

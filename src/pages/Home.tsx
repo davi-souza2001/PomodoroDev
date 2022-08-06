@@ -8,17 +8,25 @@ import { TaskFavorite } from '../components/TaskFavorite'
 
 import PomodoroLogo from '../../public/PomodoroLogo.svg'
 import UseAuth from '../data/hook/UseAuth'
+import { TaskProps } from '../data/context/AuthContext'
 
 export function Home() {
-	const { getUser, user } = UseAuth()
+	const { getUser, user, handleAddTask, getTasks, tasks } = UseAuth()
 
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
+	const [pomoTitle, setPomoTitle] = useState('')
+	const [pomoTime, setPomoTime] = useState('')
+
 	useEffect(() => {
 		getUser()
 	}, [])
+
+	useEffect(() => {
+		getTasks()
+	}, [user])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
@@ -41,20 +49,33 @@ export function Home() {
 					className='flex items-center justify-center'
 				>
 					<div className='h-72 w-80 flex items-center justify-start flex-col bg-[#181A20] rounded-lg'>
-						<form className='h-full w-full flex items-center justify-center flex-col'>
+						<form
+							onSubmit={(e) => {
+								handleAddTask(
+									e,
+									+pomoTime,
+									pomoTitle,
+									user.email
+								)
+								handleClose()
+							}}
+							className='h-full w-full flex items-center justify-center flex-col'
+						>
 							<input
 								className='h-12 w-5/6 mb-3 rounded-lg bg-[#21242c] border-none outline-none'
 								type="text"
-								placeholder={`Pomo's name`}
+								placeholder={`Pomo's title`}
+								onChange={(e) => setPomoTitle(e.target.value)}
 							/>
 							<input
 								className='h-12 w-5/6 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
 								type="text"
 								placeholder={`Pomo's time (in minute)`}
+								onChange={(e) => setPomoTime(e.target.value)}
 							/>
 							<button
+								type='submit'
 								className='bg-[#b64448] h-16 w-60 rounded-lg border-none outline-none'
-								onClick={handleClose}
 							>
 								Submit
 							</button>
@@ -88,12 +109,15 @@ export function Home() {
 				</div>
 			</div>
 			<div className='h-16 w-full flex items-center justify-start font-semibold text-xl'>
-				<span className='ml-5'>Your favorites tasks (4):</span>
+				<span className='ml-5'>Your favorites tasks ({tasks.length}):</span>
 			</div>
-			<TaskFavorite />
-			<TaskFavorite />
-			<TaskFavorite />
-			<TaskFavorite />
+			{tasks.map((task: TaskProps) => {
+				return (
+					<div key={Math.random()}>
+						<TaskFavorite title={task.title} />
+					</div>
+				)
+			})}
 		</div>
 	)
 }
