@@ -12,7 +12,8 @@ const AuthContext = createContext<AuthContextProps>({
 		avatar: '',
 		email: '',
 		name: '',
-		nick: ''
+		nick: '',
+		xp: 0
 	},
 	loading: false
 })
@@ -27,10 +28,11 @@ interface AuthContextProps {
 }
 
 interface UserProps {
-	name: string,
-	email: string,
-	avatar: string,
+	name: string
+	email: string
+	avatar: string
 	nick: string
+	xp: 0
 }
 
 export function AuthProvider(props: any) {
@@ -39,7 +41,8 @@ export function AuthProvider(props: any) {
 		avatar: '',
 		email: '',
 		name: '',
-		nick: ''
+		nick: '',
+		xp: 0
 	})
 	const [loading, setLoading] = useState(false)
 
@@ -51,7 +54,8 @@ export function AuthProvider(props: any) {
 					name: result.user.displayName ?? '',
 					email: result.user.email ?? '',
 					avatar: result.user.photoURL ?? '',
-					nick: '@testando'
+					nick: '@testando',
+					xp: 0
 				})
 				setLoading(false)
 				navigate('/')
@@ -69,7 +73,8 @@ export function AuthProvider(props: any) {
 					name: user.displayName ?? '',
 					email: user.email ?? '',
 					avatar: user.photoURL ?? '',
-					nick: '@testando'
+					nick: '@testando',
+					xp: 0
 				})
 			} else {
 				console.log('Not user')
