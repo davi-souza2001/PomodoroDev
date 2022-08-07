@@ -21,7 +21,7 @@ export function Tasks() {
 			<div className='h-[80vh] w-screen flex items-center justify-start flex-col bg-[#181A20] overflow-scroll overflow-x-hidden xl:h-[80vh]'>
 				{tasks.map((task: TaskProps) => {
 					return (
-						<Task title={task.title} favorite={task.favorite} />
+						<Task title={task.title} favorite={task.favorite} id={task.id} key={task.id} />
 					)
 				})}
 			</div>

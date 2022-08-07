@@ -20,11 +20,13 @@ const AuthContext = createContext<AuthContextProps>({
 	},
 	loading: false,
 	tasks: [{
+		id: 0,
 		email: '',
 		time: 0,
 		title: '',
 		favorite: false
-	}]
+	}],
+	timePomo: 0
 })
 const provider = new GoogleAuthProvider()
 
@@ -37,6 +39,7 @@ interface AuthContextProps {
 	user: UserProps
 	loading: boolean
 	tasks: TaskProps[]
+	timePomo: number
 }
 
 interface UserProps {
@@ -48,6 +51,7 @@ interface UserProps {
 }
 
 export interface TaskProps {
+	id: number
 	email: string
 	time: number
 	title: string
@@ -65,6 +69,7 @@ export function AuthProvider(props: any) {
 		nick: '',
 		xp: 0
 	})
+	const [timePomo, setTimePomo] = useState(0)
 
 	async function handleLoginGoogle() {
 		setLoading(true)
@@ -118,6 +123,7 @@ export function AuthProvider(props: any) {
 	async function handleAddTask(e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) {
 		e.preventDefault()
 		const data = {
+			id: Math.floor(Math.random() * 999999999),
 			time,
 			title,
 			email,
@@ -149,7 +155,8 @@ export function AuthProvider(props: any) {
 			loading,
 			handleAddTask,
 			getTasks,
-			tasks
+			tasks,
+			timePomo
 		}}>
 			{props.children}
 		</AuthContext.Provider>

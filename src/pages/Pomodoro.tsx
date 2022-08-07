@@ -1,4 +1,6 @@
 import { RingProgress } from "@mantine/core"
+import { collection, onSnapshot, query, where } from 'firebase/firestore'
+import { db } from '../firebase/config'
 import { useEffect, useState } from "react"
 import { BiPause, BiPlay, BiSquareRounded, BiX } from "react-icons/bi"
 import { useLocation } from "react-router-dom"
@@ -6,8 +8,11 @@ import { Header } from "../components/Header"
 import UseAuth from "../data/hook/UseAuth"
 
 export function Pomodoro() {
+	const { getUser } = UseAuth()
 	const { pathname } = useLocation()
 	const pathOutId = pathname.split('/')[1]
+	const [namePomo, setNamePomo] = useState('')
+	const [timePomo, setTimePomo] = useState(0)
 	const [onRunning, setOnRunning] = useState(false)
 
 	const COUNTDOWN_INITIAL_TIME_IN_SECONDS = 60 * 60// 25 minute
@@ -24,17 +29,27 @@ export function Pomodoro() {
 		}
 	}, [secondsAmount, onRunning])
 
-	const { getUser } = UseAuth()
+	async function getPomo() {
+		const q = query(collection(db, 'tasks'), where('id', '==', +pathOutId))
+		onSnapshot(q, (querySnapshot) => {
+			querySnapshot.forEach((doc) => {
+				console.log(doc.data().time)
+				setNamePomo(doc.data().title)
+				setTimePomo(doc.data().time)
+			})
+		})
+	}
 
 	useEffect(() => {
 		getUser()
-	}, [])
+		getPomo()
+	}, [pathOutId])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
 			<Header />
 			<div className='h-20 w-full flex items-center justify-start font-semibold text-2xl'>
-				<span className='ml-10'>{pathOutId} ⏰</span>
+				<span className='ml-10'>{namePomo} ⏰</span>
 			</div>
 			<div className='h-64 w-full flex items-center justify-center'>
 				<RingProgress

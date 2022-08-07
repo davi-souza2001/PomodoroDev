@@ -113,9 +113,7 @@ export function Home() {
 			</div>
 			{tasks.map((task: TaskProps) => {
 				return (
-					<div key={Math.random()}>
-						<TaskFavorite title={task.title} />
-					</div>
+					<TaskFavorite title={task.title} id={task.id} key={task.id} />
 				)
 			})}
 		</div>
