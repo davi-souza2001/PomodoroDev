@@ -15,7 +15,7 @@ export function Pomodoro() {
 	const [timePomo, setTimePomo] = useState(0)
 	const [onRunning, setOnRunning] = useState(false)
 
-	const COUNTDOWN_INITIAL_TIME_IN_SECONDS = 60 * 60// 25 minute
+	const COUNTDOWN_INITIAL_TIME_IN_SECONDS = 60 * 60 // 60 minutes
 	const [secondsAmount, setSecondsAmount] = useState(COUNTDOWN_INITIAL_TIME_IN_SECONDS)
 
 	const minutes = Math.floor(secondsAmount / 60)
