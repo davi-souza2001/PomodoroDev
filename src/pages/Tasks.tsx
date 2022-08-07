@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Header } from "../components/Header";
 import { Task } from "../components/Task";
+import { TaskProps } from "../data/context/AuthContext";
 import UseAuth from "../data/hook/UseAuth";
 
 export function Tasks() {
-	const { getUser, user, getTasks } = UseAuth()
+	const { getUser, user, getTasks, tasks } = UseAuth()
 
 	useEffect(() => {
 		getUser()
@@ -18,14 +19,11 @@ export function Tasks() {
 				<span className='ml-10'>Your tasks, {user.name.length !== 0 ? user.name : 'not user'} 🔥</span>
 			</div>
 			<div className='h-[80vh] w-screen flex items-center justify-start flex-col bg-[#181A20] overflow-scroll overflow-x-hidden xl:h-[80vh]'>
-				<Task />
-				<Task />
-				<Task />
-				<Task />
-				<Task />
-				<Task />
-				<Task />
-				<Task />
+				{tasks.map((task: TaskProps) => {
+					return (
+						<Task title={task.title} favorite={task.favorite} />
+					)
+				})}
 			</div>
 		</div>
 	)
