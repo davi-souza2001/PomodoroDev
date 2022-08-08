@@ -20,7 +20,10 @@ export function Header() {
 
 	return (
 		<div className='h-12 w-screen bg-[#14151b] flex items-center justify-between'>
-			<div className='h-full w-40 flex items-center justify-around text-xl font-semibold'>
+			<div
+			onClick={() => navigate('/')}
+			className='h-full w-40 flex items-center justify-around text-xl font-semibold cursor-pointer'
+			>
 				<img
 					className='h-full w-1/2 p-1'
 					src={PomodoroLogo} alt='logo' />

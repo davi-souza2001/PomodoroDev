@@ -16,6 +16,7 @@ export function Pomodoro() {
 
 	// const COUNTDOWN_INITIAL_TIME_IN_SECONDS = 60 * 60 // 60 minutes
 	const [secondsAmount, setSecondsAmount] = useState(0)
+	const [inicialTimePomo, setInicialTimePomo] = useState(0)
 
 	const minutes = Math.floor(secondsAmount / 60)
 	const seconds = secondsAmount % 60
@@ -24,7 +25,7 @@ export function Pomodoro() {
 		if (onRunning && secondsAmount > 0) {
 			setTimeout(() => {
 				setSecondsAmount(state => state - 1)
-			}, 0.5)
+			}, 1000)
 		}
 	}, [secondsAmount, onRunning])
 
@@ -34,6 +35,7 @@ export function Pomodoro() {
 			querySnapshot.forEach((doc) => {
 				setNamePomo(doc.data().title)
 				setSecondsAmount(doc.data().time * 60)
+				setInicialTimePomo(doc.data().time * 60)
 			})
 		})
 	}
@@ -68,6 +70,10 @@ export function Pomodoro() {
 			</div>
 			<div className='h-24 w-full flex items-center justify-center mt-5'>
 				<div
+					onClick={() => {
+						setOnRunning(false)
+						setSecondsAmount(inicialTimePomo)
+					}}
 					className='bg-red-500 p-5 text-5xl rounded-full cursor-pointer'
 				>
 					<BiX />
@@ -79,11 +85,11 @@ export function Pomodoro() {
 					{onRunning && minutes != 0 ? <BiPause /> : <BiPlay />}
 				</div>
 				<div
-					// onClick={() => {
-					// 	if (minutes === 0) {
-					// 		setSecondsAmount(COUNTDOWN_INITIAL_TIME_IN_SECONDS)
-					// 	}
-					// }}
+					onClick={() => {
+						if (minutes === 0) {
+							setSecondsAmount(inicialTimePomo)
+						}
+					}}
 					className='bg-yellow-600 p-5 text-5xl rounded-full cursor-pointer'
 				>
 					<BiSquareRounded />
