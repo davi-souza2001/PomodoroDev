@@ -12,7 +12,6 @@ export function Pomodoro() {
 	const { pathname } = useLocation()
 	const pathOutId = pathname.split('/')[1]
 	const [namePomo, setNamePomo] = useState('')
-	const [timePomo, setTimePomo] = useState(0)
 	const [onRunning, setOnRunning] = useState(false)
 
 	const COUNTDOWN_INITIAL_TIME_IN_SECONDS = 60 * 60 // 60 minutes
@@ -33,9 +32,7 @@ export function Pomodoro() {
 		const q = query(collection(db, 'tasks'), where('id', '==', +pathOutId))
 		onSnapshot(q, (querySnapshot) => {
 			querySnapshot.forEach((doc) => {
-				console.log(doc.data().time)
 				setNamePomo(doc.data().title)
-				setTimePomo(doc.data().time)
 			})
 		})
 	}
