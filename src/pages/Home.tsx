@@ -69,7 +69,7 @@ export function Home() {
 							/>
 							<input
 								className='h-12 w-5/6 mb-7 rounded-lg bg-[#21242c] border-none outline-none'
-								type="text"
+								type="number"
 								placeholder={`Pomo's time (in minute)`}
 								onChange={(e) => setPomoTime(e.target.value)}
 							/>

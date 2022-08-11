@@ -69,7 +69,7 @@ export function AuthProvider(props: any) {
 		nick: '',
 		xp: 0
 	})
-	const [timePomo, setTimePomo] = useState(0)
+	const [timePomo] = useState(0)
 
 	async function handleLoginGoogle() {
 		setLoading(true)
@@ -122,17 +122,45 @@ export function AuthProvider(props: any) {
 
 	async function handleAddTask(e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) {
 		e.preventDefault()
-		const data = {
-			id: Math.floor(Math.random() * 999999999),
-			time,
-			title,
-			email,
-			favorite: false
+		if (time < 0) {
+			const data = {
+				id: Math.floor(Math.random() * 999999999),
+				time: 0,
+				title,
+				email,
+				favorite: false
+			}
+
+			const newTaskRef = doc(collection(db, 'tasks'))
+
+			await setDoc(newTaskRef, data)
+
+		} else if (title.length === 0) {
+			const data = {
+				id: Math.floor(Math.random() * 999999999),
+				time,
+				title: 'Sem título',
+				email,
+				favorite: false
+			}
+
+			const newTaskRef = doc(collection(db, 'tasks'))
+
+			await setDoc(newTaskRef, data)
+
+		} else {
+			const data = {
+				id: Math.floor(Math.random() * 999999999),
+				time,
+				title,
+				email,
+				favorite: false
+			}
+
+			const newTaskRef = doc(collection(db, 'tasks'))
+
+			await setDoc(newTaskRef, data)
 		}
-
-		const newTaskRef = doc(collection(db, 'tasks'))
-
-		await setDoc(newTaskRef, data)
 	}
 
 	async function getTasks() {
