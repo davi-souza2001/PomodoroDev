@@ -5,10 +5,11 @@ import { TaskProps } from "../data/context/AuthContext";
 import UseAuth from "../data/hook/UseAuth";
 
 export function Tasks() {
-	const { getUser, user, getTasks, tasks } = UseAuth()
+	const { getUser, user, getTasks, tasks, getExperience } = UseAuth()
 
 	useEffect(() => {
 		getUser()
+		getExperience()
 		getTasks()
 	}, [])
 

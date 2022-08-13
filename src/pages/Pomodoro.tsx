@@ -8,7 +8,7 @@ import { Header } from "../components/Header"
 import UseAuth from "../data/hook/UseAuth"
 
 export function Pomodoro() {
-	const { getUser } = UseAuth()
+	const { getUser, getExperience } = UseAuth()
 	const { pathname } = useLocation()
 	const pathOutId = pathname.split('/')[1]
 	const [namePomo, setNamePomo] = useState('')
@@ -42,6 +42,7 @@ export function Pomodoro() {
 
 	useEffect(() => {
 		getUser()
+		getExperience()
 		getPomo()
 	}, [pathOutId])
 

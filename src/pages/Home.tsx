@@ -11,7 +11,7 @@ import UseAuth from '../data/hook/UseAuth'
 import { TaskProps } from '../data/context/AuthContext'
 
 export function Home() {
-	const { getUser, user, handleAddTask, getTasks, tasks } = UseAuth()
+	const { getUser, user, handleAddTask, getTasks, tasks, getExperience, experience } = UseAuth()
 
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
@@ -26,6 +26,8 @@ export function Home() {
 
 	useEffect(() => {
 		getTasks()
+		getExperience()
+
 	}, [user])
 
 	return (
@@ -88,10 +90,10 @@ export function Home() {
 					<RingProgress
 						label={
 							<div className='flex items-center justify-center'>
-								123
+								{experience.level}
 							</div>}
 						sections={[
-							{ value: 40, color: '#c64b4f' }
+							{ value: experience.xp ?? 0, color: '#c64b4f' }
 						]}
 					/>
 					<p>Wow! Look at the level you've reached 🚀</p>

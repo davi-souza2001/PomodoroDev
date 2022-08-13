@@ -10,6 +10,7 @@ const AuthContext = createContext<AuthContextProps>({
 	getUser: () => Promise.resolve(),
 	logout: () => Promise.resolve(),
 	getTasks: () => Promise.resolve(),
+	getExperience: () => Promise.resolve(),
 	handleAddTask: (e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) => Promise.resolve(),
 	user: {
 		avatar: '',
@@ -26,8 +27,10 @@ const AuthContext = createContext<AuthContextProps>({
 		title: '',
 		favorite: false
 	}],
-	timePomo: 0
+	timePomo: 0,
+	experience: {}
 })
+
 const provider = new GoogleAuthProvider()
 
 interface AuthContextProps {
@@ -35,11 +38,13 @@ interface AuthContextProps {
 	getUser: () => Promise<void>
 	logout: () => Promise<void>
 	getTasks: () => Promise<void>
+	getExperience: () => Promise<void>
 	handleAddTask: (e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) => Promise<void>
 	user: UserProps
 	loading: boolean
 	tasks: TaskProps[]
 	timePomo: number
+	experience: ExperienceProps
 }
 
 interface UserProps {
@@ -58,6 +63,13 @@ export interface TaskProps {
 	favorite: boolean
 }
 
+export interface ExperienceProps {
+	id?: number
+	email?: string
+	xp?: number
+	level?: number
+}
+
 export function AuthProvider(props: any) {
 	const navigate = useNavigate()
 	const [loading, setLoading] = useState(false)
@@ -69,6 +81,7 @@ export function AuthProvider(props: any) {
 		nick: '',
 		xp: 0
 	})
+	const [experience, setExperienca] = useState<ExperienceProps>({})
 	const [timePomo] = useState(0)
 
 	async function handleLoginGoogle() {
@@ -82,6 +95,7 @@ export function AuthProvider(props: any) {
 					nick: '@testando',
 					xp: 0
 				})
+				getExperience()
 				setLoading(false)
 				navigate('/')
 			}).catch((error) => {
@@ -174,6 +188,20 @@ export function AuthProvider(props: any) {
 		})
 	}
 
+	async function getExperience() {
+		if (user.email) {
+			console.log('entrei em email')
+			const q = query(collection(db, 'experience'), where('email', '==', user.email))
+			onSnapshot(q, (querySnapshot) => {
+				querySnapshot.forEach((doc) => {
+					setExperienca(doc.data())
+				})
+			})
+		} else {
+			console.log('Sem usuário')
+		}
+	}
+
 	return (
 		<AuthContext.Provider value={{
 			handleLoginGoogle,
@@ -183,7 +211,9 @@ export function AuthProvider(props: any) {
 			loading,
 			handleAddTask,
 			getTasks,
+			getExperience,
 			tasks,
+			experience,
 			timePomo
 		}}>
 			{props.children}

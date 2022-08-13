@@ -7,10 +7,11 @@ import UseAuth from "../data/hook/UseAuth"
 import { useEffect } from "react"
 
 export function Profile() {
-	const { logout, user, getUser } = UseAuth()
+	const { logout, user, getUser, getExperience } = UseAuth()
 
 	useEffect(() => {
 		getUser()
+		getExperience()
 	}, [])
 
 	return (
