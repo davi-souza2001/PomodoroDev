@@ -94,6 +94,7 @@ export function AuthProvider(props: any) {
 					nick: '@testando',
 					xp: 0
 				})
+				result.user.email && handleAddExperience(result.user.email)
 				getExperience()
 				setLoading(false)
 				navigate('/')
@@ -196,6 +197,23 @@ export function AuthProvider(props: any) {
 				})
 			})
 		}
+	}
+
+	async function handleAddExperience(email: string) {
+		const q = query(collection(db, 'experience'), where('email', '==', email))
+		onSnapshot(q, async (querySnapshot) => {
+			if (querySnapshot.empty) {
+				const data: ExperienceProps = {
+					email,
+					level: 0,
+					xp: 0
+				}
+
+				const newTaskRef = doc(collection(db, 'experience'))
+
+				await setDoc(newTaskRef, data)
+			}
+		})
 	}
 
 	return (

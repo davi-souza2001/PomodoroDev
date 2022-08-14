@@ -10,7 +10,7 @@ export function Login() {
 	const navigate = useNavigate()
 	const [loginArea, setLoginArea] = useState(false)
 
-	const { handleLoginGoogle, getExperience } = UseAuth()
+	const { handleLoginGoogle } = UseAuth()
 
 	function handleOpenLoginArea() {
 		setLoginArea(!loginArea)
