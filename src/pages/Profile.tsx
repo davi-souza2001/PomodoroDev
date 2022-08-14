@@ -7,12 +7,12 @@ import UseAuth from "../data/hook/UseAuth"
 import { useEffect } from "react"
 
 export function Profile() {
-	const { logout, user, getUser, getExperience } = UseAuth()
+	const { logout, user, getUser, getExperience, experience } = UseAuth()
 
 	useEffect(() => {
 		getUser()
 		getExperience()
-	}, [])
+	}, [user])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
@@ -22,10 +22,10 @@ export function Profile() {
 					<RingProgress
 						label={
 							<div className='flex items-center justify-center'>
-								123
+								{experience.level}
 							</div>}
 						sections={[
-							{ value: 40, color: '#c64b4f' }
+							{ value: experience.xp ?? 0, color: '#c64b4f' }
 						]}
 					/>
 				</div>
