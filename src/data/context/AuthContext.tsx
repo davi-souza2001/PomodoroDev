@@ -191,25 +191,9 @@ export function AuthProvider(props: any) {
 		if (user.email !== '') {
 			const q = query(collection(db, 'experience'), where('email', '==', user.email))
 			onSnapshot(q, async (querySnapshot) => {
-				if (querySnapshot.empty) {
-					console.log('asd')
-					console.log('Não tem experience')
-					const data: ExperienceProps = {
-						email: user.email,
-						level: 1,
-						xp: 0
-					}
-					setExperience(data)
-
-					// const newExperienceRef = doc(collection(db, 'experience'))
-
-					// await setDoc(newExperienceRef, data)
-				} else {
-					console.log(' tem experience')
-					querySnapshot.forEach(async (result) => {
-						setExperience(result.data())
-					})
-				}
+				querySnapshot.forEach(async (result) => {
+					setExperience(result.data())
+				})
 			})
 		}
 	}
