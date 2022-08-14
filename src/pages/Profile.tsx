@@ -46,7 +46,6 @@ export function Profile() {
 					/>
 					<div className='flex items-center justify-center flex-col'>
 						<span className='ml-3'>{user.name.length !== 0 ? user.name : 'not user'}</span>
-						<span className='ml-[-40px] text-sm'>{user.nick.length !== 0 ? user.nick : 'not nick'}</span>
 					</div>
 				</div>
 			</div>
