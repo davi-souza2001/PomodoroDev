@@ -25,10 +25,11 @@ export function Login() {
 					</div>
 					<div className='h-60 w-full flex items-center justify-start flex-col'>
 						<div
+							onClick={handleLoginGoogle}
 							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center mb-3'
 						>
 							<img className='h-10' src={googleIcon} alt='Google Icon' />
-							<button className='ml-3' onClick={handleLoginGoogle}>Continue with Google</button>
+							<button className='ml-3' >Continue with Google</button>
 						</div>
 						<div
 							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center'

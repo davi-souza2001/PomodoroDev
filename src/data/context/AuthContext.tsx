@@ -64,7 +64,6 @@ export interface TaskProps {
 }
 
 export interface ExperienceProps {
-	id?: number
 	email?: string
 	xp?: number
 	level?: number
@@ -81,7 +80,7 @@ export function AuthProvider(props: any) {
 		nick: '',
 		xp: 0
 	})
-	const [experience, setExperienca] = useState<ExperienceProps>({})
+	const [experience, setExperience] = useState<ExperienceProps>({})
 	const [timePomo] = useState(0)
 
 	async function handleLoginGoogle() {
@@ -189,16 +188,29 @@ export function AuthProvider(props: any) {
 	}
 
 	async function getExperience() {
-		if (user.email) {
-			console.log('entrei em email')
+		if (user.email !== '') {
 			const q = query(collection(db, 'experience'), where('email', '==', user.email))
-			onSnapshot(q, (querySnapshot) => {
-				querySnapshot.forEach((doc) => {
-					setExperienca(doc.data())
-				})
+			onSnapshot(q, async (querySnapshot) => {
+				if (querySnapshot.empty) {
+					console.log('asd')
+					console.log('Não tem experience')
+					const data: ExperienceProps = {
+						email: user.email,
+						level: 1,
+						xp: 0
+					}
+					setExperience(data)
+
+					// const newExperienceRef = doc(collection(db, 'experience'))
+
+					// await setDoc(newExperienceRef, data)
+				} else {
+					console.log(' tem experience')
+					querySnapshot.forEach(async (result) => {
+						setExperience(result.data())
+					})
+				}
 			})
-		} else {
-			console.log('Sem usuário')
 		}
 	}
 
