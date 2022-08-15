@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
-import { collection, onSnapshot, doc, query, where, setDoc } from 'firebase/firestore'
+import { collection, onSnapshot, doc, query, where, setDoc, updateDoc, increment } from 'firebase/firestore'
 
 import { auth, db } from '../../firebase/config'
 
@@ -11,6 +11,7 @@ const AuthContext = createContext<AuthContextProps>({
 	logout: () => Promise.resolve(),
 	getTasks: () => Promise.resolve(),
 	getExperience: () => Promise.resolve(),
+	updateExperience: () => Promise.resolve(),
 	handleAddTask: (e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) => Promise.resolve(),
 	user: {
 		avatar: '',
@@ -39,6 +40,7 @@ interface AuthContextProps {
 	logout: () => Promise<void>
 	getTasks: () => Promise<void>
 	getExperience: () => Promise<void>
+	updateExperience: () => Promise<void>
 	handleAddTask: (e: React.FormEvent<HTMLFormElement>, time: number, title: string, email: string) => Promise<void>
 	user: UserProps
 	loading: boolean
@@ -209,11 +211,24 @@ export function AuthProvider(props: any) {
 					xp: 0
 				}
 
-				const newTaskRef = doc(collection(db, 'experience'))
-
-				await setDoc(newTaskRef, data)
+				await setDoc(doc(db, "experience", user.email), data)
 			}
 		})
+	}
+
+	async function updateExperience() {
+		const experienceRef = doc(db, "experience", user.email);
+
+		if (experience.xp === 90) {
+			await updateDoc(experienceRef, {
+				xp: 0,
+				level: increment(1)
+			})
+		} else {
+			await updateDoc(experienceRef, {
+				xp: increment(10)
+			})
+		}
 	}
 
 	return (
@@ -228,6 +243,7 @@ export function AuthProvider(props: any) {
 			getExperience,
 			tasks,
 			experience,
+			updateExperience,
 			timePomo
 		}}>
 			{props.children}
