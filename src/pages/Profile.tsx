@@ -10,9 +10,13 @@ export function Profile() {
 	const { logout, user, getUser, getExperience, experience } = UseAuth()
 
 	useEffect(() => {
-		getUser()
 		getExperience()
 	}, [user])
+
+	useEffect(() => {
+		getUser()
+
+	}, [])
 
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
