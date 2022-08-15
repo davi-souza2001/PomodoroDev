@@ -8,7 +8,7 @@ import { Header } from "../components/Header"
 import UseAuth from "../data/hook/UseAuth"
 
 export function Pomodoro() {
-	const { getUser, getExperience } = UseAuth()
+	const { getUser, getExperience, updateExperience } = UseAuth()
 	const { pathname } = useLocation()
 	const pathOutId = pathname.split('/')[1]
 	const [namePomo, setNamePomo] = useState('')
@@ -22,7 +22,12 @@ export function Pomodoro() {
 	const seconds = secondsAmount % 60
 
 	useEffect(() => {
+		if (secondsAmount === 1) {
+			updateExperience()
+		}
+
 		if (onRunning && secondsAmount > 0) {
+			console.log(secondsAmount)
 			setTimeout(() => {
 				setSecondsAmount(state => state - 1)
 			}, 1000)

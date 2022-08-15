@@ -11,7 +11,7 @@ import UseAuth from '../data/hook/UseAuth'
 import { TaskProps } from '../data/context/AuthContext'
 
 export function Home() {
-	const { getUser, user, handleAddTask, getTasks, tasks, getExperience, experience, updateExperience } = UseAuth()
+	const { getUser, user, handleAddTask, getTasks, tasks, getExperience, experience } = UseAuth()
 
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
@@ -33,7 +33,6 @@ export function Home() {
 	return (
 		<div className='bg-[#181A20] h-screen w-screen font-poppins'>
 			<Header />
-			<button onClick={updateExperience}>asdsa</button>
 			<div className='h-20 w-full flex items-center justify-around font-semibold text-2xl'>
 				<span className='xl:ml-[-20vw]'>
 					Morning, {user.name.length !== 0 ? user.name : 'not user'} 👋
