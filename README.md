@@ -18,3 +18,5 @@ Pomodoro is an application that brings the most essential aspects of the pomodor
 ![image](https://user-images.githubusercontent.com/77704994/184536103-366d2b99-479c-4e63-82f0-cbed6469396b.png)
 
 </html>   
+
+<!-- asd -->
