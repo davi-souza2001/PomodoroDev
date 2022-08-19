@@ -6,7 +6,6 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Pomodoro } from './pages/Pomodoro'
 import { Profile } from './pages/Profile'
-import { Register } from './pages/Register'
 import { Tasks } from './pages/Tasks'
 
 export default function App() {
@@ -16,7 +15,6 @@ export default function App() {
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/login' element={<Login />} />
-					<Route path='/register' element={<Register />} />
 					<Route path='/tasks' element={<Tasks />} />
 					<Route path='/profile' element={<Profile />} />
 					<Route path='/:pomodoro' element={<Pomodoro />} />

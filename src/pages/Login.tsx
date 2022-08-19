@@ -31,12 +31,6 @@ export function Login() {
 							<img className='h-10' src={googleIcon} alt='Google Icon' />
 							<button className='ml-3' >Continue with Google</button>
 						</div>
-						<div
-							className='bg-[#292c37] h-14 w-80 rounded-lg font-semibold cursor-pointer flex items-center justify-center'
-						>
-							<img className='h-10' src={githubIcon} alt='Github Icon' />
-							<button className='ml-3' onClick={() => navigate('/register')}>Continue with Github</button>
-						</div>
 					</div>
 				</div>
 				:

@@ -210,8 +210,7 @@ export function AuthProvider(props: any) {
 					level: 0,
 					xp: 0
 				}
-
-				await setDoc(doc(db, "experience", user.email), data)
+				await setDoc(doc(db, "experience", email), data)
 			}
 		})
 	}
