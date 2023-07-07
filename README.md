@@ -1,5 +1,5 @@
 <html>   
-<h1 align="center">
+<h1>
    Pomorodo
 </h1>
 
